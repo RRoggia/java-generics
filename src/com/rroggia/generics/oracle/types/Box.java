@@ -1,4 +1,4 @@
-package com.rroggia.generics.oracle;
+package com.rroggia.generics.oracle.types;
 
 public class Box<T> {
 
