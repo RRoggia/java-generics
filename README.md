@@ -25,15 +25,17 @@ By convention, type parameter names are single, uppercase letters.
 * *generic type invocation* : Replacement of a *type parameter* `T` to a *type argument*, such as `Integer`. Example: `new Box<Integer>();`.
 * *type argument* | *actual type parameter*:  The *actual type parameter* of a *formal type parameter*. Example: `Integer`. 
 * *parameterized type* : Class or interface followed by an angle-bracketed list of the *actual type parameter*. Example:`List<Integer>`
+* *raw type*: *generic type* without any type arguments. Example `List`
 
-### online
-[Oracle tutorial](https://docs.oracle.com/javase/tutorial/java/generics/index.html)
-[Gilad Bracha tutorial](https://docs.oracle.com/javase/tutorial/extra/generics/index.html)
+## References
+### Online
+* [Oracle tutorial](https://docs.oracle.com/javase/tutorial/java/generics/index.html)
+* [Gilad Bracha tutorial](https://docs.oracle.com/javase/tutorial/extra/generics/index.html)
 
-### books
-learningjava -> chapter 8.
-javapocketguide -> chapter 16.
-javainanutshell -> chapter 4 -> Java Generics
-javagenericsandcollections -> chapters 1~9 
-javacookbook -> pages 199~203
-javaeffective -> chapter5
+### Books
+* learningjava -> chapter 8.
+* javapocketguide -> chapter 16.
+* javainanutshell -> chapter 4 -> Java Generics
+* javagenericsandcollections -> chapters 1~9 
+* javacookbook -> pages 199~203
+* javaeffective -> chapter5
