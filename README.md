@@ -19,6 +19,23 @@ By convention, type parameter names are single, uppercase letters.
 * V - Value
 * S,U,V etc. - 2nd, 3rd, 4th types
 
+### Bounded type parameter
+Requires the *type parameter* to `extends|implements` the `Comparable` and it allows you to invoke methods defined in the `Comparable`. 
+```java
+public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem) {
+    int count = 0;
+    for (T e : anArray)
+        if (e.compareTo(elem) > 0) \\compareTo is a method defined in the bound
+            ++count;
+    return count;
+}
+```
+
+### Inheritance
+Given two concrete types A and B (for example, Number and Integer), MyClass<A> has no relationship to MyClass<B>, regardless of whether or not A and B are related. The common parent of MyClass<A> and MyClass<B> is Object.
+
+You can subtype a generic class or interface by extending or implementing it. Using the `Collections` classes as an example, `ArrayList<E>` implements `List<E>`, and `List<E>` extends `Collection<E>`. So `ArrayList<String>` is a subtype of `List<String>`, which is a subtype of `Collection<String>`. 
+
 ### Glosary
 * *type variable* | *type parameter* | *formal type parameter* : An unqualified identifier used as a type in class, interface, method, and constructor bodies. A type variable can be any **non-primitive** type you specify: Any class type, any interface type, any array type, or even another type variable. Examples: `E` or `T`.
 * *generic type* : A generic class or interface that is parameterized over types. Example: `List<E>`.
