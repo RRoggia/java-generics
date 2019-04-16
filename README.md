@@ -42,6 +42,12 @@ Determination of the type argument that make the invocation applicable. The infe
 Type inference helps to reduce the verbosity of the code, making it easier to read. Type inference makes unnecessary to specify the type in the generic method call and during the instantiation of a class. 
 
 ### Wildcards
+Represents an unknown type. Mainly used as the type of a parameter, field, or local variable.
+
+### Upper Bounded Wildcards
+You can use an upper bounded wildcard to relax the restrictions on a variable. It matches the type and any of its subtypes. 
+
+### Unbounded Wildcards
 
 ### Glosary
 * *type variable* | *type parameter* | *formal type parameter* : An unqualified identifier used as a type in class, interface, method, and constructor bodies. A type variable can be any **non-primitive** type you specify: Any class type, any interface type, any array type, or even another type variable. Examples: `E` or `T`.
@@ -52,7 +58,9 @@ Type inference helps to reduce the verbosity of the code, making it easier to re
 * *raw type* : *Generic type* without any type arguments. Example `List`.
 * *generic methods* : Methods that introduce their own *type parameters*. Example: `static <E> List<E> asList(E[] a)`.
 * *bounded type parameters* : To restrict the types that can be used as *type argument*. In this context, the `extends` represents both `extends` and `implements`. Example: `<E extends Number>` or `<E extends Number & InterfaceA & InterfaceB>`. 
-* *type witness* : During the generic method invocation, you can avoid the *type inference* by specifying *type argument*. e.g. `List.<Integer>add(10)`
+* *type witness* : During the generic method invocation, you can avoid the *type inference* by specifying *type argument*. Example: `List.<Integer>add(10)`
+* *wildcards* : unknown type. Example: `?`
+* *Upper bounded wildcards* : To relax the restrictions on a variable. In this context, the `extends` represents both `extends` and `implements`. Example: `<? extends Number>`
 
 ## References
 ### Online
