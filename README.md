@@ -70,7 +70,6 @@ An "out" variable holds data for use elsewhere. In the copy example, copy(src, d
 
 **These guidelines do not apply to a method's return type. Using a wildcard as a return type should be avoided because it forces programmers using the code to deal with wildcards.**
 
- 
 ### Wildcards and Subtyping
 Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E>`). The following statements are valid:
 * `List<Number>` has a relationship with `List<? super Number>`. Since `Number` is the specific type of the lower bound wildcard.
