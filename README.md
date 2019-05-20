@@ -52,6 +52,24 @@ A method that can be implemented using functionality provided in the `Object` cl
 
 ### Lower Bound Wildcards
 Restricts the unknown type to be a specific type or a super type of that type.
+
+### Guidelines for wildcard use
+**An "In" Variable**
+
+An "in" variable serves up data to the code. Imagine a copy method with two arguments: copy(src, dest). The src argument provides the data to be copied, so it is the "in" parameter.
+
+**An "Out" Variable**
+
+An "out" variable holds data for use elsewhere. In the copy example, copy(src, dest), the dest argument accepts data, so it is the "out" parameter.
+
+**Wildcard Guidelines:** 
+* An "in" variable is defined with an upper bounded wildcard, using the extends keyword.
+* An "out" variable is defined with a lower bounded wildcard, using the super keyword.
+* In the case where the "in" variable can be accessed using methods defined in the Object class, use an unbounded wildcard.
+* In the case where the code needs to access the variable as both an "in" and an "out" variable, do not use a wildcard.
+
+**These guidelines do not apply to a method's return type. Using a wildcard as a return type should be avoided because it forces programmers using the code to deal with wildcards.**
+
  
 ### Wildcards and Subtyping
 Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E>`). The following statements are valid:
@@ -65,7 +83,6 @@ Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E
 * `List<Integer>` has a relationship with `List<? extends Number>` Since `Integer` is a subtype of `Number`.
 * `List<? extends Integer>` has a relationship with `List<? extends Number>`. Since `Integer` is a subtype of `Number`.
 * `List<Integer>` has a relationship with `List<?>`. Since `Integer` is a concrete type and all concrete types are subtypes of `?`.
-    
 
 ### Type Parameter vs Bounded Type Parameter vs upper bounded wildcards vs unbounded wildcards
 *Type parameter* can only assume one type argument at time.
