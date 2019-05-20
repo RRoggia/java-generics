@@ -51,7 +51,21 @@ You can use an upper bounded wildcard to relax the restrictions on a variable. I
 A method that can be implemented using functionality provided in the `Object` class or a generic class that don't depend on the type parameter. In fact, Class<?> is so often used because most of the methods in Class<T> do not depend on T.
 
 ### Lower Bound Wildcards
- Restricts the unknown type to be a specific type or a super type of that type.
+Restricts the unknown type to be a specific type or a super type of that type.
+ 
+### Wildcards and Subtyping
+Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E>`). The following statements are valid:
+* `List<Number>` has a relationship with `List<? super Number>`. Since `Number` is the specific type of the lower bound wildcard.
+* `List<Number>` has a relationship with `List<? super Integer>`. Since `Number`is a supertype of `Integer`.
+* `List<Number>` has a relationship with `List<?>`. Since `Number` is a concrete type and `?` is a supertype for all the concrete types. Same applies for `List<? super Number>` and `List<? super Integer>`.
+* `List<Number>` has a relationship with `List<? extends Number>`. Since `Number` is the specific type of the upper bound wildcard.  
+* `List<? super Number>` has a relationshop with `List<? super Integer>`. Since `Number` is a supertype of `Integer`.
+* `List<Integer>` has a relationship with `List<? super Integer>`. Since `Integer` is the specific type of the lower bound wildcard.
+* `List<Integer>` has a relationship with `List<? extends Integer>`. Since `Integer` is the specific type of the upper bound wildcard.
+* `List<Integer>` has a relationship with `List<? extends Number>` Since `Integer` is a subtype of `Number`.
+* `List<? extends Integer>` has a relationship with `List<? extends Number>`. Since `Integer` is a subtype of `Number`.
+* `List<Integer>` has a relationship with `List<?>`. Since `Integer` is a concrete type and all concrete types are subtypes of `?`.
+    
 
 ### Type Parameter vs Bounded Type Parameter vs upper bounded wildcards vs unbounded wildcards
 *Type parameter* can only assume one type argument at time.
