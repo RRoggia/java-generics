@@ -21,7 +21,8 @@ By convention, type parameter names are single, uppercase letters.
 
 ### Bounded type parameter
 Requires the *type parameter* to `extends|implements` the `Comparable` and it allows you to invoke methods defined in the `Comparable`. 
-```java
+
+```` java
 public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem) {
     int count = 0;
     for (T e : anArray)
@@ -29,7 +30,7 @@ public static <T extends Comparable<T>> int countGreaterThan(T[] anArray, T elem
             ++count;
     return count;
 }
-```
+````
 
 ### Inheritance
 Given two concrete types A and B (for example, Number and Integer), MyClass<A> has no relationship to MyClass<B>, regardless of whether or not A and B are related. The common parent of MyClass<A> and MyClass<B> is Object.
@@ -85,9 +86,13 @@ Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E
 
 ### Type Parameter vs Bounded Type Parameter vs upper bounded wildcards vs unbounded wildcards
 *Type parameter* can only assume one type argument at time.
+
 *Bounded Type Parameter* can assume one type argument and its subtypes. Enable usage of specific methods of a type.
+
 *Unbounded wilcards* can assume several type argument at time.
+
 *Upper Bounded Wildcards* can assume several type argument at time and its subtypes. Enable usage of specific methods of a type.
+
 *Lower Bounded Wildcards* can assume several type argument at time and its supertypes.
 
 ### Glosary
