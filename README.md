@@ -9,6 +9,11 @@ Generics enable types (classes and interfaces) to be parameters when defining cl
 * Eliminates casts of objects
 * Enable to reuse code for different types
 
+### How it works?
+A generic type declaration is compiled once and for all, and turned into a single class file, just like an ordinary class or interface declaration. At this moment that happens the type erasure. 
+
+A *generic* declaration has *formal type parameters*. When a generic declaration is invoked, the *actual type arguments* are substituted for the *formal type parameters*.
+
 ### Type parameter Naming Conventions
 By convention, type parameter names are single, uppercase letters.
 
@@ -18,6 +23,11 @@ By convention, type parameter names are single, uppercase letters.
 * T - Type
 * V - Value
 * S,U,V etc. - 2nd, 3rd, 4th types
+
+### Generic Method
+The compiler infers the type argument for us, based on the types of the actual arguments. It will generally infer the most specific type argument that will make the call type-correct. `com.rroggia.generics.oracle.genTypeInference` demonstrate the type inference.
+
+Generic methods allow type parameters to be used to express dependencies among the types of one or more arguments to a method and/or its return type. If there isn't such a dependency, a generic method should not be used.
 
 ### Bounded type parameter
 Requires the *type parameter* to `extends|implements` the `Comparable` and it allows you to invoke methods defined in the `Comparable`. 
@@ -43,13 +53,15 @@ Determination of the type argument that make the invocation applicable. The infe
 Type inference helps to reduce the verbosity of the code, making it easier to read. Type inference makes unnecessary to specify the type in the generic method call and during the instantiation of a class. 
 
 ### Wildcards
-Represents an unknown type. Mainly used as the type of a parameter, field, or local variable.
+Represents an unknown type. Mainly used as the type of a parameter, field, or local variable. Wildcards also have the advantage that they can be used outside of method signatures, as the types of fields, local variables and arrays.
 
 ### Upper Bounded Wildcards
 You can use an upper bounded wildcard to relax the restrictions on a variable. It matches the type and any of its subtypes. 
 
 ### Unbounded Wildcards
-A method that can be implemented using functionality provided in the `Object` class or a generic class that don't depend on the type parameter. In fact, Class<?> is so often used because most of the methods in Class<T> do not depend on T.
+A method that can be implemented using functionality provided in the `Object` class or a generic class that don't depend on the type parameter. In fact, `Class<?>` is so often used because most of the methods in `Class<T>` do not depend on `T`.
+
+This is consider the supertype of all kinds of objects. For example, the `Collection<?>` can be considered a *collection of unknown*, that is, a collection whose elements types matches anything.
 
 ### Lower Bound Wildcards
 Restricts the unknown type to be a specific type or a super type of that type.
@@ -70,6 +82,10 @@ An "out" variable holds data for use elsewhere. In the copy example, copy(src, d
 * In the case where the code needs to access the variable as both an "in" and an "out" variable, do not use a wildcard.
 
 **These guidelines do not apply to a method's return type. Using a wildcard as a return type should be avoided because it forces programmers using the code to deal with wildcards.**
+
+The return type doesn't depend on the type parameter, nor does any other argument to the method. This tells us that the type argument is being used for polymorphism; its only effect is to allow a variety of actual argument types to be used at different invocation sites. If that is the case, one should use wildcards. Wildcards are designed to support flexible subtyping, which is what we're trying to express here.
+
+Using wildcards is clearer and more concise than declaring explicit type parameters, and should therefore be preferred whenever possible.
 
 ### Wildcards and Subtyping
 Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E>`). The following statements are valid:
