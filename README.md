@@ -84,6 +84,11 @@ Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E
 * `List<? extends Integer>` has a relationship with `List<? extends Number>`. Since `Integer` is a subtype of `Number`.
 * `List<Integer>` has a relationship with `List<?>`. Since `Integer` is a concrete type and all concrete types are subtypes of `?`.
 
+### Type Erasure
+* Replace all type parameters in generic types with their bounds or Object if the type parameters are unbounded. The produced bytecode, therefore, contains only ordinary classes, interfaces, and methods.
+* Insert type casts if necessary to preserve type safety.
+* Generate bridge methods to preserve polymorphism in extended generic types.
+
 ### Type Parameter vs Bounded Type Parameter vs upper bounded wildcards vs unbounded wildcards
 *Type parameter* can only assume one type argument at time.
 
