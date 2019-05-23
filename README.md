@@ -52,6 +52,9 @@ Determination of the type argument that make the invocation applicable. The infe
 
 Type inference helps to reduce the verbosity of the code, making it easier to read. Type inference makes unnecessary to specify the type in the generic method call and during the instantiation of a class. 
 
+### Raw Type 
+Raw types are very much like wildcard types, but they are not typechecked as stringently. It was a design decision to enable generics code with pre-existing legacy code. therefore it should be avoided.
+
 ### Wildcards
 Represents an unknown type. Mainly used as the type of a parameter, field, or local variable. Wildcards also have the advantage that they can be used outside of method signatures, as the types of fields, local variables and arrays.
 
