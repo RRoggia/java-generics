@@ -10,9 +10,17 @@ Generics enable types (classes and interfaces) to be parameters when defining cl
 * Enable to reuse code for different types
 
 ### How it works?
-A generic type declaration is compiled once and for all, and turned into a single class file, just like an ordinary class or interface declaration. At this moment that happens the type erasure. 
+A generic type declaration is compiled once and for all, and turned into a single class file, just like an ordinary class or interface declaration. At this moment that happens the type erasure. Therefore, all instances of a generic class have the same run-time class, regardless of their actual type parameters. 
 
 A *generic* declaration has *formal type parameters*. When a generic declaration is invoked, the *actual type arguments* are substituted for the *formal type parameters*.
+
+#### Generics with Casts, InstanceOf and Arrays
+Type variables don't exist at run time. This means that they entail no performance overhead in either time nor space, which is nice. Unfortunately, it also means that you can't reliably use them in casts.
+
+he component type of an array object may not be a type variable or a parameterized type, unless it is an (unbounded) wildcard type.You can declare array types whose element type is a type variable or a parameterized type, but not array objects. 
+
+See the fineprint `package` for the examples.
+
 
 ### Type parameter Naming Conventions
 By convention, type parameter names are single, uppercase letters.
