@@ -21,7 +21,6 @@ he component type of an array object may not be a type variable or a parameteriz
 
 See the fineprint `package` for the examples.
 
-
 ### Type parameter Naming Conventions
 By convention, type parameter names are single, uppercase letters.
 
@@ -98,6 +97,8 @@ The return type doesn't depend on the type parameter, nor does any other argumen
 
 Using wildcards is clearer and more concise than declaring explicit type parameters, and should therefore be preferred whenever possible.
 
+In general, if you have an API that only uses a type parameter T as an argument, its uses should take advantage of lower bounded wildcards (? super T). Conversely, if the API only returns T, you'll give your clients more flexibility by using upper bounded wildcards (? extends T).
+
 ### Wildcards and Subtyping
 Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E>`). The following statements are valid:
 * `List<Number>` has a relationship with `List<? super Number>`. Since `Number` is the specific type of the lower bound wildcard.
@@ -116,6 +117,8 @@ Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E
 * Insert type casts if necessary to preserve type safety.
 * Generate bridge methods to preserve polymorphism in extended generic types.
 
+When a multiple bound is used, the first type mentioned in the bound is used as the erasure of the type variable.
+
 ### Type Parameter vs Bounded Type Parameter vs upper bounded wildcards vs unbounded wildcards
 *Type parameter* can only assume one type argument at time.
 
@@ -126,6 +129,9 @@ Given the inheritance in the generic class (E.g. `ArrayList<E> implements List<E
 *Upper Bounded Wildcards* can assume several type argument at time and its subtypes. Enable usage of specific methods of a type.
 
 *Lower Bounded Wildcards* can assume several type argument at time and its supertypes.
+
+### Class Literals as Run-Time Type Tokens
+The package `com.rroggia.generics.oracle.literals` demonstrates the generics API in conjunction with the reflection API. In this example, the usage of the reflection API, now enhanced with generic type, avoids the creation of a factory class (annonymous or concrete). 
 
 ### Glosary
 * *type variable* | *type parameter* | *formal type parameter* : An unqualified identifier used as a type in class, interface, method, and constructor bodies. A type variable can be any **non-primitive** type you specify: Any class type, any interface type, any array type, or even another type variable. Examples: `E` or `T`.
