@@ -23,7 +23,7 @@ Raw types should only be used for compatibility reasons, for example to integrat
 
 Two exceptions to use Raw Types:
 * As class literals. e.g. `List.class` because `List<String>.class` is not allowed.
-* `instanceof` invocations: Since the generic type is erased at runtime, adding the angle brackets and question mark is just noise.
+* `instanceof` invocations: Since the generic type is erased at runtime, it's not allowed to cast `instanceof` on parameterized type, it's only allowed on the unbounded wildcarD. Therefore, adding the angle brackets and question mark is just noise.
 
 ```java
 if (o instanceof Set) {
