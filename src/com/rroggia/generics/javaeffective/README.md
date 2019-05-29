@@ -29,4 +29,15 @@ Two exceptions to use Raw Types:
 if (o instanceof Set) {
 	Set<?> s = (Set<?>) o;
 } 
+```
+
+### Item 27: Eliminate unchecked warnings
+If you eliminate all warnings, you are assured that your code is typesafe, which means you won't get a `ClassCastException` at runtime.
+
+If you can't eliminate a warning, but you can prove that the code that provoked the warning is typesafe, then (and only then) suppress the warning with an `@SuppressWarnings("unchecked")` annotation.
+If you suppress warnings without first proving that the code is typesafe, you are giving yourself a false sense of security. If you ignore unchecked warnings that you know to be safe (instead of suppressing them), you won't notice when a new warnings crops up that represents a real problem.
+
+Always use the `SuprressWarning` on the smallest scope possible.
+
+Every time you use a `@SuppressWarnings("unchecked")` annotation, add a comment saying why it is safe to do so.
 
