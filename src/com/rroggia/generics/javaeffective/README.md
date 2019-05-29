@@ -41,3 +41,21 @@ Always use the `SuprressWarning` on the smallest scope possible.
 
 Every time you use a `@SuppressWarnings("unchecked")` annotation, add a comment saying why it is safe to do so.
 
+### Item 28: Prefers lists to arrays
+Two important differences between lists and arrays:
+1. Arrays are *covariant* and Lists are *invariant*.
+
+```java
+Object[] objectArray = new Long[1]; //valid due to covariant
+
+List<Object> ol = new ArrayList<Long>(); //invalid, types are incompatible
+```
+
+With lists you can spot an error at compile time, with arrays you can only notice it at runtime.
+ 
+2. Arrays are *reified* and Generics are implemented with *erasure* and therefore are *non reifiable* types.
+Arrays knows and enforces their element type at runtime.
+
+Generics by contrast erases their element type at runtime, which means generics only enforces their type constraint at compile time. So, a list has less information about its type parameter at runtime than at compiler time.
+
+Because of the second characteristic of the generics, it's not a good idea to mix generics and arrays. Notice, it's also valid for vargars methods, since they use arrays to hold the varargs parameters.
