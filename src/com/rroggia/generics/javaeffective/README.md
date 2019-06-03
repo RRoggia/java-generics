@@ -59,3 +59,12 @@ Arrays knows and enforces their element type at runtime.
 Generics by contrast erases their element type at runtime, which means generics only enforces their type constraint at compile time. So, a list has less information about its type parameter at runtime than at compiler time.
 
 Because of the second characteristic of the generics, it's not a good idea to mix generics and arrays. Notice, it's also valid for vargars methods, since they use arrays to hold the varargs parameters.
+
+### Item 29: Favor Generics Types
+It is generally not too difficult to parameterize your declaration and make use of the generic types and methods provided by the JDK. Writing your own generic type is a bit more difficult.
+
+The `Stack` class is implemented without the generics. It uses an `Object[]` to store the elements, the `push(Object e)` enables to pushes whatever subtype of Object to the stack, because of that the `pop` relies on a cast to the specific subtype which may lead to `ClassCastException`. 
+
+The `Stack1` class implementation relies on generics. It uses an `E[]` to store the elements. Since you cannot create `new E[]`, because, `E` is a *non refiable* type, during the constructor we create a `Object[]` and cast it to the type `E[]`.
+
+The `Stack2` class implementation relies on generics. It uses an `Object[]` to store the elements. The `push(E e)` method ensures the array will only contain objects of the type `E`, therefore, when `pop()` method is called is safe to cast the array element to the type `E`. The down side of this approach is that you can end up with several casts to the type `E`.
