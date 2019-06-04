@@ -1,8 +1,8 @@
 # java-generics
 
 ### Studies
-* [Oracle new and old tutorials]()
-* [Java Effective chapter 5]()
+* [Oracle new and old tutorials](https://github.com/RRoggia/java-generics/tree/master/src/com/rroggia/generics/oracle)
+* [Java Effective chapter 5](https://github.com/RRoggia/java-generics/tree/master/src/com/rroggia/generics/javaeffective)
 
 ## References
 ### Online
