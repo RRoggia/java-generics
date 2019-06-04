@@ -1,4 +1,4 @@
-#Oracle tutorial
+# Oracle tutorial
 
 ### What it is a generic type?
 A Class or Interface is generic if it declares one or more *type variables*.[JLS, 8.1.2, 9.1.2]
