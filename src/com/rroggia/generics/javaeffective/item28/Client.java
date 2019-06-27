@@ -1,6 +1,7 @@
 package com.rroggia.generics.javaeffective.item28;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +29,13 @@ public class Client {
 		Chooser3<String> chooser3 = new Chooser3<>(list);
 		String string3 = chooser3.choose();
 		System.out.println(string3);
+
+		System.out.println("Chooser4 - Same as 3, but with the flexibility rules item 31");
+		List<Integer> integers = Arrays.asList(3, 2, 1);
+		Chooser4<Number> chooser4 = new Chooser4<>(integers);
+		Number choose = chooser4.choose();
+		System.out.println(choose);
+
 	}
 
 }
@@ -62,6 +70,19 @@ class Chooser3<T> {
 	private final List<T> choiceList;
 
 	public Chooser3(Collection<T> choices) {
+		choiceList = new ArrayList<>(choices);
+	}
+
+	public T choose() {
+		Random rnd = ThreadLocalRandom.current();
+		return choiceList.get(rnd.nextInt(choiceList.size()));
+	}
+}
+
+class Chooser4<T> {
+	private final List<T> choiceList;
+
+	public Chooser4(Collection<? extends T> choices) {
 		choiceList = new ArrayList<>(choices);
 	}
 

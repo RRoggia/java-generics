@@ -72,6 +72,30 @@ The `Stack2` class implementation relies on generics. It uses an `Object[]` to s
 ### Item 30: Favor Generic Methods
 Static utility methods that operate on parameterized types are usually generic. For example, `binarySearch` and `sort` from `Collections`.
 
-To create objects that are immutable but applicable to many different types, you can apply the *generic singleton factory* pattern by taking advantage of the erasure of the generic. The `identityFunction` method examplifies the pattern.
+To create objects that are immutable but applicable to many different types, you can apply the *generic singleton factory* pattern by taking advantage of the erasure of the generic. The `identityFunction` method exemplifies the pattern.
 
 We can also have a type parameter that is bound to a expression involving that type parameter itself, it's called *recursive type bound*. For example: `<E extends Comparable<E>>`. It may be read as "any type `E` that can be compared to itself".
+
+### Item 31: Use bounded wildcards to increase API flexibility
+As noted in Item 28, parameterized types are *invariant*. However, is possible to achieve the behavior using *bounded wildcards*.
+* Lower bounded wildcard: will accept any supertype or the type itself
+* Upper bounded wildcard: will accept any subtype or the type itself.
+
+For maximum flexibility, use wildcard types on input parameters that represent producers or consumers. If the input parameter is both producer and consumer use an exact type match.
+
+PECS stands for producer-extends, consumer-super.
+
+-->> **SEE THE GET AND PUT PRINCIPLE FROM JAVA-GENERICS AND COLLECTIONS** <<--
+
+Examples:
+* Item28: `Chooser4` Class
+* Item30: `unionBoundedWildCardType` method
+* Item30: `max` method
+
+Do not use *bound wildcard types* as return types. They require the client code to work with wildcard. Properly used, wildcard types are nearly invisible to the users of a class. If the user of a class has to think about wildcard types, there is probably something wrong with its API.
+
+`Comparable<T>` and `Comparator<T>` are always consumers, therefore, preferably use `<? super T>`.
+
+As a rule, if a type parameter appears only once in a method declaration, replace it with a wildcard. If it's a unbounded type parameter, replace it with an unbounded wildcard. If it's a bounded type parameter, replace it with a bounded wildcard.
+
+
