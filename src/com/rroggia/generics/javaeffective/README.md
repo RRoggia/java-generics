@@ -98,4 +98,40 @@ Do not use *bound wildcard types* as return types. They require the client code 
 
 As a rule, if a type parameter appears only once in a method declaration, replace it with a wildcard. If it's a unbounded type parameter, replace it with an unbounded wildcard. If it's a bounded type parameter, replace it with a bounded wildcard.
 
+### Item 32: Combine generics and varargs judiciously
+Varargs methods and generics were both added to the platform in Java 5, so you might expect them to interact gracefully; sadly, they do not.
+
+If a method declares its varargs parameter to be of a non-reifiable type `T...` the warning compiler generates a warning on the declaration.
+
+ `warning: [unchecked] Possible heap pollution from parameterized vararg type T`
+ 
+The methods `getParameters` and `dangerous` in the class `com.rroggia.generics.javaeffective.item32.Client` demonstrates the warning message.  
+
+Heap pollution occurs when a variable of a parameterized type refers to an object that is not that type [JLS 4.12.2] It can cause the compiler's automatically generated casts to fail, violating the fundamental guarantee of the generic type system.
+
+It's unsafe to store a value in a generic varargs array parameter.
+
+There are typesafe methods with varargs parameters of generic or parameterized types in the java library. `Arrays.asList(T... a)`,`Colections.addAll(Collection<? super T> c, T... elements)`.
+
+In Java 7, the `SafeVarargs` annotation was added to the platform, to allow the author of a method with generic varargs parameter to suppress client warnings automatically. In essence, the SafeVarargs constitutes a promise by the author of a method that it is typesafe.
+
+It is critical that you do not annotate a method with `@SafeVarargs` unless it is actually safe.
+
+**Ensuring a method with varargs parameters of generic or parameterized types is safe:** 
+If the method doesn't store anything into the array (which would overwrite the parameters) and doesn't allow a reference to the array to escape (which would enable untrusted code to access the array). Then it's safe.   
+
+In other words, if the varargs parameter array is used only to transmit a variable number of arguments from the caller to the method then the method is safe.
+
+The method `toArray` in the class `com.rroggia.generics.javaeffective.item32.Client` demonstrates how is dangerous to expose the reference of a generic's vararg parameter.
+
+It's unsafe to give another method access to a generic varargs parameter array.
+
+The method `flatten` in the class `com.rroggia.generics.javaeffective.item32.Client` demonstrates how a safe implementation of the combination looks like. Also notice the usage of the `@SafeVarargs` annotation.
+
+As a rule of thumb, use `@SafeVarargs` on every method with a varargs parameter of a generic type or parameterized type, so its user won't be burdened by needless and confusing compiler warnings. This implies that you should never write unsafe varargs methods like `dangerous` or `toArray`.
+
+An alternative to using the `SafeVarargs` annoattation is to take the advice of Item28 and replace the varargs parameter (which is an array in disguise) with a `List` parameter.
+
+
+
 
