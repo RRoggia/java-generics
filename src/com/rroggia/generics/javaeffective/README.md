@@ -132,6 +132,6 @@ As a rule of thumb, use `@SafeVarargs` on every method with a varargs parameter 
 
 An alternative to using the `SafeVarargs` annoattation is to take the advice of Item28 and replace the varargs parameter (which is an array in disguise) with a `List` parameter.
 
-
+### Item 33: Consider typesafe heterogeneous containers
 
 
